@@ -1,0 +1,26 @@
+.app-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 3rem;
+    background-color: #1a1a2e;
+    padding: 1rem 2rem;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: auto;
+
+    .footer-content {
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        
+        span {
+            color: #4a90e2;
+            transition: color 0.3s ease;
+            
+            &:hover {
+                color: #ffd700;
+            }
+        }
+    }
+}

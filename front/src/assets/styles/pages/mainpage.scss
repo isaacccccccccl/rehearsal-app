@@ -1,0 +1,86 @@
+.main-page {
+    padding: 20px;
+    
+    .songs-section {
+        margin-top: 20px;
+        
+        h2 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+    }
+}
+
+.admin-main {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    h1 {
+        color: #e0e0e0;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            font-size: 16px;
+
+            &::placeholder {
+                color: #666;
+            }
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 2px rgb(74, 144, 226);
+            }
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgb(74, 144, 226);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: rgb(74, 144, 226);
+            }
+        }
+    }
+}
+
+.song-list {
+    .selectable {
+        cursor: pointer;
+        transition: background-color 0.2s;
+        
+        
+    }
+    
+    .disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+}
+
+.song-preview {
+    &.selectable {
+        cursor: pointer;
+    }
+    
+    &.disabled {
+        cursor: not-allowed;
+    }
+} 

@@ -1,0 +1,35 @@
+// Setup
+@import "setup/variables";
+@import "setup/functions";
+@import "setup/mixins";
+@import "setup/typography";
+
+// Basics
+@import "basics/helpers";
+@import "basics/layout";
+@import "basics/base";
+@import "basics/forms";
+
+// pages
+@import "RootCmp";
+@import "pages/LoginSignup";
+@import "pages/Signup";
+@import "pages/Login";
+@import "pages/MainPage";
+@import "pages/ResultsPage";
+@import "pages/livepage";
+
+// Components
+@import "cmps/list";
+@import "cmps/preview";
+@import "cmps/AppHeader";
+@import "cmps/AppFooter";
+@import "cmps/UserMsg";
+@import "cmps/SongList";
+@import "cmps/SongPreview";
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #23244d 0%, #4a90e2 40%, #a259c6 80%, #ff6a88 100%);
+  background-attachment: fixed;
+}

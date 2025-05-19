@@ -1,0 +1,214 @@
+// Variables
+$primary-color: #4a90e2;
+$secondary-color: #2c3e50;
+$success-color: #2ecc71;
+$error-color: #e74c3c;
+$background-color: #f5f6fa;
+$text-color: #2c3e50;
+$border-radius: 12px;
+$box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+$transition: all 0.3s ease;
+
+// Mixins
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin input-style {
+    width: 100%;
+    padding: 16px 18px;
+    border: 2px solid #e1e1e1;
+    border-radius: $border-radius;
+    font-size: 1.1rem;
+    transition: $transition;
+    background: #fafbfc;
+    color: $text-color;
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.08);
+    }
+}
+
+// Signup Form Styles
+.signup-form {
+    width: fit-content;
+    min-width: 400px;
+    margin: 3rem auto;
+    padding: 3rem 2.5rem;
+    background: white;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    
+    h2 {
+        color: $secondary-color;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2.2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+        label {
+            display: block;
+            margin-bottom: 0.7rem;
+            color: $secondary-color;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        @include input-style;
+    }
+
+    .instrument-selection {
+        margin: 2rem 0 1rem 0;
+        label {
+            display: block;
+            margin-bottom: 1rem;
+            color: $secondary-color;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 1rem 0.5rem;
+            background: $background-color;
+            border-radius: $border-radius;
+            label {
+                @include flex-center;
+                gap: 0.5rem;
+                padding: 0.7rem;
+                background: white;
+                border-radius: $border-radius;
+                cursor: pointer;
+                transition: $transition;
+                font-weight: normal;
+                font-size: 1rem;
+                border: 2px solid transparent;
+                &:hover {
+                    background: rgba($primary-color, 0.07);
+                }
+                input[type="radio"] {
+                    appearance: none;
+                    width: 20px;
+                    height: 20px;
+                    border: 2px solid #ddd;
+                    border-radius: 50%;
+                    margin: 0;
+                    position: relative;
+                    cursor: pointer;
+                    transition: $transition;
+                    &:checked {
+                        border-color: $primary-color;
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            width: 10px;
+                            height: 10px;
+                            background: $primary-color;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .admin-checkbox {
+        margin: 1.5rem 0 0.5rem 0;
+        padding: 1rem;
+        background: $background-color;
+        border-radius: $border-radius;
+        label {
+            @include flex-center;
+            gap: 0.8rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: $secondary-color;
+            input[type="checkbox"] {
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                border: 2px solid #ddd;
+                border-radius: 4px;
+                margin: 0;
+                position: relative;
+                cursor: pointer;
+                transition: $transition;
+                &:checked {
+                    background: $primary-color;
+                    border-color: $primary-color;
+                    &::after {
+                        content: '✓';
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        color: white;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+
+    button {
+        width: 100%;
+        padding: 1.1rem;
+        background: $primary-color;
+        color: white;
+        border: none;
+        border-radius: $border-radius;
+        font-size: 1.15rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: $transition;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 1rem;
+        &:hover {
+            background: darken($primary-color, 10%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba($primary-color, 0.18);
+        }
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 900px) {
+    .signup-form {
+        max-width: 98vw;
+        margin: 2rem;
+        padding: 2rem;
+        .radio-group {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+    }
+}
+@media (max-width: 600px) {
+    .signup-form {
+        margin: 1rem;
+        padding: 1rem;
+        .radio-group {
+            grid-template-columns: 1fr !important;
+        }
+    }
+} 

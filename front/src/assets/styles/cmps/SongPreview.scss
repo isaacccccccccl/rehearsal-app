@@ -1,0 +1,39 @@
+.song-preview {
+    width: 100%;
+    background: #232323;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(74, 144, 226, 0.08);
+    padding: 1.5rem 1.2rem;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+
+    &:hover {
+        box-shadow: 0 8px 32px rgba(74, 144, 226, 0.18);
+        transform: translateY(-2px) scale(1.02);
+    }
+
+    .song-title {
+        color: #4a90e2;
+        font-weight: 700;
+        font-size: 1.2em;
+        margin-bottom: 0.2em;
+        letter-spacing: 0.5px;
+    }
+    p {
+        margin: 0;
+        color: #b3b3b3;
+        font-size: 1em;
+        span {
+            color: #fff;
+            font-weight: 500;
+        }
+    }
+}
+
+.song-preview.hebrew {
+    direction: rtl;
+    text-align: right;
+} 
