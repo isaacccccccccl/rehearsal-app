@@ -11,3 +11,5 @@ node_modules
 dist
 dist-ssr
 *.local
+/front/node_modules
+/backend/node_modules
