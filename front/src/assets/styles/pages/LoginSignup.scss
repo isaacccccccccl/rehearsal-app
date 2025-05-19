@@ -2,7 +2,7 @@
 .signup-form {
 	display: grid;
 	width: min(80%, 300px);
-	margin: auto;
+	margin: 0 auto;
 
 	padding: 1em;
 	background-color: $clr4;
@@ -44,4 +44,19 @@
 		text-decoration: underline;
 		color: $clr2;
 	}
+}
+
+.login-page, .signup-page {
+	min-height: 100vh;
+	background: inherit;
+}
+
+.form-center {
+	min-height: 100vh;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0;
 }

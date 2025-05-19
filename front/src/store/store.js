@@ -17,9 +17,3 @@ export const store = createStore(
     composeEnhancers(applyMiddleware(thunk))
 )
 
-// For debug:
-// store.subscribe(() => {
-//     console.log('**** Store state changed: ****')
-//     console.log('storeState:\n', store.getState())
-//     console.log('*******************************')
-// })

@@ -69,7 +69,6 @@ function createSocketService() {
       socket.emit(SOCKET_EMIT_REHEARSAL_JOIN, { sessionId, userId })
     },
     selectRehearsalSong(sessionId, song) {
-      console.log('selectRehearsalSong', sessionId, song)
       socket.emit(SOCKET_EMIT_REHEARSAL_SONG_SELECT, { sessionId, song })
     },
     endRehearsal(sessionId) {
@@ -90,10 +89,8 @@ function createDummySocketService() {
       this.setup()
     },
     login() {
-      console.log('Dummy socket service here, login - got it')
     },
     logout() {
-      console.log('Dummy socket service here, logout - got it')
     },
     on(eventName, cb) {
       listenersMap[eventName] = [...(listenersMap[eventName]) || [], cb]

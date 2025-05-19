@@ -96,4 +96,25 @@
             }
         }
     }
+
+    @include for-mobile-layout {
+        .app_header {
+            min-height: 2.7rem;
+            padding: 0 1rem;
+        }
+        .logo {
+            font-size: 1.1em;
+        }
+        .admin-badge {
+            font-size: 0.8em;
+            padding: 0.2em 0.6em;
+        }
+        min-height: 2.2rem;
+        padding: 0 0.5rem;
+        nav {
+            gap: 1em;
+            .logo { font-size: 1em; }
+            .admin-badge { font-size: 0.7em; padding: 0.15em 0.4em; }
+        }
+    }
 }

@@ -13,13 +13,11 @@ export function setupSocketAPI(http) {
         }
     })
     gIo.on('connection', socket => {
-        logger.info(`New connected socket [id: ${socket.id}]`)
 
         // --- REHEARSAL SESSION EVENTS ---
         // Admin starts a rehearsal session
         socket.on('rehearsal-start', ({ sessionId, adminId }) => {
             if (rehearsalSessions[sessionId]) return // Already exists
-            logger.info(`Rehearsal started by admin ${adminId} in session ${sessionId}`)
             rehearsalSessions[sessionId] = {
                 adminId,
                 users: [socket.id],
@@ -29,7 +27,6 @@ export function setupSocketAPI(http) {
             }
             socket.join(sessionId)
             socket.emit('rehearsal-started', { sessionId })
-            logger.info(`Rehearsal started by admin ${adminId} in session ${sessionId}`)
         })
 
         // User joins a rehearsal session
@@ -42,17 +39,14 @@ export function setupSocketAPI(http) {
             session.users.push(socket.id)
             socket.join(sessionId)
             socket.emit('rehearsal-joined', { sessionId, currentSong: session.currentSong })
-            logger.info(`User ${userId} joined rehearsal session ${sessionId}`)
         })
 
         // Admin selects a song
         socket.on('rehearsal-song-select', ({ sessionId, song }) => {
-            logger.info(`Song selected for session ${sessionId}`)
             const session = rehearsalSessions[sessionId]
             if (!session || !session.isActive) return
             session.currentSong = song
             gIo.to(sessionId).emit('rehearsal-song-update', { song })
-            logger.info(`Song selected for session ${sessionId}`)
         })
 
         // Admin ends the rehearsal
@@ -62,7 +56,6 @@ export function setupSocketAPI(http) {
             session.isActive = false
             gIo.to(sessionId).emit('rehearsal-ended')
             delete rehearsalSessions[sessionId]
-            logger.info(`Rehearsal session ${sessionId} ended`)
         })
 
         // --- EXISTING EVENTS ---

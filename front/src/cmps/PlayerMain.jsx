@@ -5,23 +5,27 @@ import { useNavigate } from 'react-router'
 
 export function PlayerMain() {
     const [connected, setConnected] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const [sessionCode, setSessionCode] = useState('')
     const user = userService.getLoggedinUser()
     const navigate = useNavigate()
 
     function onConnectRehearsal() {
         if (!user) return
-        // For now, assume sessionId is admin's userId (could be passed in real app)
-        // You may want to get the sessionId from the server or UI
-        const sessionId = prompt('Enter session code (admin userId):')
-        if (!sessionId) return
-        socketService.joinRehearsal(sessionId, user._id)
+        setShowModal(true)
+    }
+
+    function handleModalSubmit(e) {
+        e.preventDefault()
+        if (!sessionCode) return
+        socketService.joinRehearsal(sessionCode, user._id)
         socketService.on('rehearsal-joined', () => setConnected(true))
         socketService.on('rehearsal-not-found', () => alert('Rehearsal not found!'))
+        setShowModal(false)
     }
 
     useEffect(() => {
         function onSongUpdate({ song }) {
-            console.log('Received rehearsal-song-update', song); // Debug log
             navigate(`/live/${song._id}`)
         }
         socketService.on(SOCKET_EVENT_REHEARSAL_SONG_UPDATE, onSongUpdate)
@@ -31,7 +35,30 @@ export function PlayerMain() {
     return (
         <section className="player-main">
             {!connected ? (
-                <button className="main-blue-btn" onClick={onConnectRehearsal}>Connect to Rehearsal</button>
+                <>
+                    <button className="main-blue-btn" onClick={onConnectRehearsal}>Connect to Rehearsal</button>
+                    {showModal && (
+                        <div className="modal-backdrop">
+                            <div className="modal">
+                                <form onSubmit={handleModalSubmit}>
+                                    <label>
+                                        Enter session code (admin userId):
+                                        <input
+                                            type="text"
+                                            value={sessionCode}
+                                            onChange={e => setSessionCode(e.target.value)}
+                                            autoFocus
+                                        />
+                                    </label>
+                                    <div className="modal-actions">
+                                        <button type="submit" className="main-blue-btn">OK</button>
+                                        <button type="button" className="cancel-btn" onClick={() => setShowModal(false)}>Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    )}
+                </>
             ) : (
                 <h1>Waiting for next song</h1>
             )}

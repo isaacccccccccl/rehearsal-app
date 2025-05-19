@@ -26,7 +26,6 @@ export function AdminMain() {
 
     function onStartRehearsal() {
         if (!user) return
-        console.log('user', user)
         setRehearsalStarted(true)
         socketService.startRehearsal(user._id, user._id)
     }
@@ -44,14 +43,14 @@ export function AdminMain() {
                 />
                 <button type="submit">Search</button>
             </form>
-            <div style={{ margin: '20px 0' }}>
+            <div >
                 <button className="main-blue-btn" onClick={onStartRehearsal} disabled={rehearsalStarted}>
                     {rehearsalStarted ? 'Rehearsal Started' : 'Start Rehearsal'}
                 </button>
                 {rehearsalStarted && (
-                    <span style={{ marginLeft: '15px' }}>
+                    <span>
                         <strong>Session code:</strong> <span style={{ userSelect: 'all' }}>{user._id}</span>
-                        <button className="main-blue-btn" style={{ marginLeft: '10px' }} onClick={() => navigator.clipboard.writeText(user._id)}>Copy</button>
+                        <button className="main-blue-btn" onClick={() => navigator.clipboard.writeText(user._id)}>Copy</button>
                     </span>
                 )}
             </div>

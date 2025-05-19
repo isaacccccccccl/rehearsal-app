@@ -1,25 +1,28 @@
 # Rehearsal App
 
-A real-time web application for band rehearsals and song management. Built with React/Redux (frontend) and Node.js/Express/Socket.io (backend).
+A real-time web application for band rehearsals and song management.  
+**Frontend:** React + Vite + Redux + SCSS  
+**Backend:** Node.js + Express + Socket.io
 
 ## Features
 - **Role-based access:** Admin and user roles
 - **Song management:** Search, filter, and preview songs
 - **Real-time rehearsal sessions:**
   - Admin can start/end sessions
-  - Users join live sessions
-  - Live song/chord/lyric display
-- **Responsive, modern UI:**
+  - Users join live sessions with a session code (now via a mobile-friendly modal)
+  - Live song/chord/lyric display, auto-scroll, and responsive layout
+- **Modern, responsive UI:**
   - Dark/blue theme
-  - Role-based navigation
-  - Copy session code
+  - Music note favicon
+  - Mobile-first design
+  - Accessible and visually appealing
 - **Clean codebase:** Only essential files and logic
 
 ## Getting Started
 
 ### Prerequisites
 - Node.js (v16+ recommended)
-- npm or yarn
+- npm
 
 ### Installation
 1. **Clone the repository:**
@@ -44,10 +47,10 @@ A real-time web application for band rehearsals and song management. Built with 
 2. **Start the frontend dev server:**
    ```bash
    cd ../front
-   npm start
+   npm run dev
    ```
 3. **Open your browser:**
-   - Visit [http://localhost:3000](http://localhost:3000)
+   - Visit [http://localhost:5173](http://localhost:5173) (or the port Vite shows)
 
 ### Environment Variables
 - Configure backend and frontend `.env` files as needed (e.g., for API URLs, ports).
@@ -66,11 +69,9 @@ backend/    # Node.js/Express/Socket.io backend
   - End session for all users
 - **User:**
   - Log in as a user
-  - Join live sessions
+  - Join live sessions (enter session code in modal)
   - View live song/chord/lyric display
 
 ## License
 MIT
 
----
-*Created by Isaac Levy* 

@@ -15,7 +15,6 @@ export function LivePage() {
   // sessionId is admin's userId for now
   const sessionId = user?._id;
   const lyricsContainerRef = useRef(null);
-  console.log('user', user)
 
   useEffect(() => {
     const fetchSong = async () => {
@@ -42,24 +41,17 @@ export function LivePage() {
     if (!song) return;
     const container = lyricsContainerRef.current;
     if (!container) {
-      console.log('No container found for lyrics');
       return;
     }
-    // Log container and its computed styles
-    console.log('Container:', container);
     const computed = window.getComputedStyle(container);
-    console.log('Computed height:', computed.height, 'overflowY:', computed.overflowY);
     let scrollInterval;
     if (autoScroll) {
-      console.log('Auto-scroll enabled');
       scrollInterval = setInterval(() => {
-        console.log('scrollTop:', container.scrollTop, 'clientHeight:', container.clientHeight, 'scrollHeight:', container.scrollHeight);
         if (container.scrollTop + container.clientHeight < container.scrollHeight) {
           container.scrollTop += 1;
         }
       }, 50);
     } else {
-      console.log('Auto-scroll paused, resetting to top');
       container.scrollTop = 0;
     }
     return () => clearInterval(scrollInterval);
@@ -84,17 +76,17 @@ export function LivePage() {
     return (
       <div key={index} style={lineStyle}>
         {showChords && (
-          <div style={{ display: 'flex', gap: '2em', minHeight: '1.2em' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1em', minHeight: '1.2em' }}>
             {line.map((word, i) => (
-              <span key={i} style={{ minWidth: '2.5em', textAlign: 'center', color: highContrast ? '#ffd700' : '#1DB954', fontWeight: 600 }}>
+              <span key={i} style={{ minWidth: '2em', textAlign: 'center', color: highContrast ? '#ffd700' : '#1DB954', fontWeight: 600 }}>
                 {word.chords || ''}
               </span>
             ))}
           </div>
         )}
-        <div style={{ display: 'flex', gap: '2em', minHeight: '1.2em' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1em', minHeight: '1.2em' }}>
           {line.map((word, i) => (
-            <span key={i} style={{ minWidth: '2.5em', textAlign: 'center' }}>{word.lyrics}</span>
+            <span key={i} style={{ minWidth: '2em', textAlign: 'center' }}>{word.lyrics}</span>
           ))}
         </div>
       </div>

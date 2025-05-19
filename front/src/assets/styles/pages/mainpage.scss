@@ -58,6 +58,17 @@
                 background-color: rgb(74, 144, 226);
             }
         }
+
+        @include for-mobile-layout {
+            flex-direction: column;
+            gap: 0.5rem;
+            button {
+                width: 50%;
+                margin: 0;
+                align-self: center;
+            }
+           
+        }
     }
 }
 

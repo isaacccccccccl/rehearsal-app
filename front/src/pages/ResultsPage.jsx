@@ -25,7 +25,6 @@ export function ResultsPage() {
                 console.error('Song not found for id:', songId)
                 return
             }
-            console.log('Admin emitting selectRehearsalSong', user._id, song);
             socketService.selectRehearsalSong(user._id, song);
             setTimeout(() => navigate(`/live/${songId}`), 200); // Add a small delay
         }
