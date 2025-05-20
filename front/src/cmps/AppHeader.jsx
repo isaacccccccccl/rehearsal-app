@@ -33,7 +33,9 @@ export function AppHeader() {
 				{user && (
 					<div className="user-info">
 						<Link to={`user/${user._id}`}>
-							<span className="user-name">{user.fullname}</span>
+							<span className="user-name">
+								{user.fullname.charAt(0).toUpperCase() + user.fullname.slice(1)}
+							</span>
 							{user.instrument && <span className="instrument">{user.instrument}</span>}
 						</Link>
 						<button onClick={onLogout} className="logout-btn">Logout</button>
