@@ -69,7 +69,7 @@ function _buildCriteria(filterBy) {
     if (filterBy.txt) {
         criteria.$or = [
             { title: { $regex: filterBy.txt, $options: 'i' } },
-            { author: { $regex: filterBy.txt, $options: 'i' } }
+            { artist: { $regex: filterBy.txt, $options: 'i' } }
         ]
     }
     return criteria

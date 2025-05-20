@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import http from 'http'
 import path from 'path'
 import cors from 'cors'
@@ -8,6 +9,7 @@ import { authRoutes } from './api/auth/auth.routes.js'
 import { userRoutes } from './api/user/user.routes.js'
 import { songRoutes } from './api/songs/song.routes.js'
 import { setupSocketAPI } from './services/socket.service.js'
+import { logger } from './services/logger.service.js'
 
 
 const app = express()
@@ -37,16 +39,10 @@ app.use('/api/songs', songRoutes)
 
 setupSocketAPI(server)
 
-// Make every unhandled server-side-route match index.html
-// so when requesting http://localhost:3030/unhandled-route... 
-// it will still serve the index.html file
-// and allow vue/react-router to take it from there
-
 app.get('/**', (req, res) => {
     res.sendFile(path.resolve('public/index.html'))
 })
 
-import { logger } from './services/logger.service.js'
 const port = process.env.PORT || 3030
 
 server.listen(port, () => {
