@@ -34,7 +34,7 @@ export function AppHeader() {
 					<div className="user-info">
 						<Link to={`user/${user._id}`}>
 							<span className="user-name">
-								{user.fullname.charAt(0).toUpperCase() + user.fullname.slice(1)}
+								{user.fullname.charAt(0).toUpperCase() + user.fullname.slice(1)} 
 							</span>
 							{user.instrument && <span className="instrument">{user.instrument}</span>}
 						</Link>
