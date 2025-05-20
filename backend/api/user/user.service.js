@@ -85,7 +85,13 @@ async function update(user) {
 }
 
 async function add(user) {
-    logger.debug('userService - add', user)
+    logger.info('Attempting to add new user:', { 
+        username: user.username,
+        fullname: user.fullname,
+        isAdmin: user.isAdmin,
+        instrument: user.instrument
+    })
+    
 	try {
 		// peek only updatable fields!
 		const userToAdd = {
@@ -95,11 +101,18 @@ async function add(user) {
 			isAdmin: user.isAdmin,
             instrument: user.instrument,
 		}
+		logger.info('User object prepared for database')
+		
 		const collection = await dbService.getCollection('user')
+		logger.info('Got user collection from database')
+		
 		await collection.insertOne(userToAdd)
+		logger.info('User successfully added to database')
+		
 		return userToAdd
 	} catch (err) {
-		logger.error('cannot add user', err)
+		logger.error('Failed to add user:', err)
+		logger.error('Error details:', err.message)
 		throw err
 	}
 }
