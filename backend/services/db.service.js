@@ -22,9 +22,6 @@ async function _connect() {
 	if (dbConn) return dbConn
     
 	try {
-		logger.info('Connecting to MongoDB...')
-		logger.info('DB URL:', config.dbURL ? 'exists' : 'missing')
-		logger.info('DB Name:', config.dbName ? 'exists' : 'missing')
 		
 		const client = await MongoClient.connect(config.dbURL)
 		logger.info('Connected to MongoDB successfully')

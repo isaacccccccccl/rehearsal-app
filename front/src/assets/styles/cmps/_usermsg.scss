@@ -8,9 +8,9 @@
 
     padding: .2em;
     padding-inline-end: 20px;
-    background-color: grey;
+    background-color: #000000;
 
-    color:white;
+    color: $clr4;
     font-size: .9em;
 
     opacity: 0;
@@ -26,14 +26,17 @@
 .user-msg button {
     background-color: $gray1;
     padding: 1px 6px;
-    border:0;
+    border: 0;
     border-radius: 50%;
-    color: $gray4;
+    color: $clr4;
 }
 
 .user-msg.success {
-    background-color: rgb(41, 189, 73);
+    background-color: #000000;
+    color: $clr4;
 }
+
 .user-msg.error {
-    background-color: rgb(216, 59, 59);
-}
+    background-color: #000000;
+    color: $clr4;
+} 

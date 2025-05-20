@@ -12,22 +12,22 @@
 
 // pages
 @import "RootCmp";
-@import "pages/LoginSignup";
-@import "pages/Signup";
-@import "pages/Login";
-@import "pages/MainPage";
-@import "pages/ResultsPage";
-@import "pages/livepage";
+@import "pages/_loginsignup";
+@import "pages/_login";
+@import "pages/_signup";
+@import "pages/_mainpage";
+@import "pages/_resultpage";
+@import "pages/_livepage";
 
 // Components
-@import "cmps/list";
-@import "cmps/preview";
-@import "cmps/AppHeader";
-@import "cmps/AppFooter";
-@import "cmps/UserMsg";
-@import "cmps/SongList";
-@import "cmps/SongPreview";
-@import "cmps/PlayerMain";
+// @import "cmps/list";
+// @import "cmps/preview";
+@import "cmps/_appheader";
+@import "cmps/_appfooter";
+@import "cmps/_usermsg";
+@import "cmps/_songlist";
+@import "cmps/_songpreview";
+@import "cmps/_playermain";
 
 body {
   min-height: 100vh;
