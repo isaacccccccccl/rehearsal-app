@@ -51,7 +51,7 @@ export function PlayerMain() {
                                         />
                                     </label>
                                     <div className="modal-actions">
-                                        <button type="submit" className="main-blue-btn">OK</button>
+                                        <button type="submit" className="main-blue-btn ok-btn">OK</button>
                                         <button type="button" className="cancel-btn" onClick={() => setShowModal(false)}>Cancel</button>
                                     </div>
                                 </form>

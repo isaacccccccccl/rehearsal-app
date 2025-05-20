@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { signup } from '../store/actions/user.actions'
-import { userService } from '../services/user'
 
 export function Signup() {
     const [credentials, setCredentials] = useState({

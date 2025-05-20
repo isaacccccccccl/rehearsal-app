@@ -11,9 +11,20 @@ const rootReducer = combineReducers({
     songModule: songReducer,
 })
 
+// Custom middleware to handle async actions
+const asyncMiddleware = store => next => async action => {
+    if (typeof action === 'function') {
+        return action(store.dispatch, store.getState)
+    }
+    if (action instanceof Promise) {
+        return action.then(result => next(result))
+    }
+    return next(action)
+}
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 export const store = createStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(thunk))
+    composeEnhancers(applyMiddleware(thunk, asyncMiddleware))
 )
 

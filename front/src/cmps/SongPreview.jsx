@@ -1,9 +1,3 @@
-import { useNavigate } from 'react-router'
-
-function isHebrew(text) {
-    return /[\u0590-\u05FF]/.test(text);
-}
-
 export function SongPreview({ song, isSelectable, onSelectSong }) {
     const isHeb = song.language === 'he';
     function handleClick() {

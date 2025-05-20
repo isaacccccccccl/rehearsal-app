@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { userService } from '../services/user'
 import { socketService } from '../services/socket.service'
+import { loadSongs } from '../store/actions/song.actions'
 
 export function AdminMain() {
     const [query, setQuery] = useState('')
@@ -19,8 +20,9 @@ export function AdminMain() {
         setQuery(ev.target.value)
     }
 
-    function onSearch(ev) {
+    async function onSearch(ev) {
         ev.preventDefault()
+        await loadSongs({ txt: query })
         navigate(`/results?query=${encodeURIComponent(query)}`)
     }
 

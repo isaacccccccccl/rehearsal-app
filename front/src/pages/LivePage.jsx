@@ -3,6 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { songService } from '../services/song.service';
 import { socketService, SOCKET_EVENT_REHEARSAL_ENDED } from '../services/socket.service';
+import { LiveLyrics } from '../cmps/LiveLyrics';
+import { LiveControls } from '../cmps/LiveControls';
+import { SongInfo } from '../cmps/SongInfo';
 
 export function LivePage() {
   const { songId } = useParams();
@@ -57,105 +60,30 @@ export function LivePage() {
     return () => clearInterval(scrollInterval);
   }, [autoScroll, song]);
 
-  const isHebrew = (text) => /[\u0590-\u05FF]/.test(text);
-
-  const renderNewFormatLyrics = (line, index) => {
-    const isHebrewLine = line.some(word => isHebrew(word.lyrics));
-    const showChords = user?.instrument?.toLowerCase() !== 'vocals';
-    const lineStyle = {
-      fontSize: `${fontSize}px`,
-      textAlign: isHebrewLine ? 'right' : 'left',
-      direction: isHebrewLine ? 'rtl' : 'ltr',
-      color: highContrast ? '#ffffff' : '#e0e0e0',
-      backgroundColor: highContrast ? '#000000' : 'transparent',
-      padding: '8px',
-      margin: '12px 0',
-      borderRadius: '4px',
-    };
-
-    return (
-      <div key={index} style={lineStyle}>
-        {showChords && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1em', minHeight: '1.2em' }}>
-            {line.map((word, i) => (
-              <span key={i} style={{ minWidth: '2em', textAlign: 'center', color: highContrast ? '#ffd700' : '#1DB954', fontWeight: 600 }}>
-                {word.chords || ''}
-              </span>
-            ))}
-          </div>
-        )}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1em', minHeight: '1.2em' }}>
-          {line.map((word, i) => (
-            <span key={i} style={{ minWidth: '2em', textAlign: 'center' }}>{word.lyrics}</span>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  const renderOldFormatLyrics = (line, index) => {
-    const isHebrewLine = isHebrew(line.lyrics);
-    const showChords = user?.instrument?.toLowerCase() !== 'vocals';
-    const lineStyle = {
-      fontSize: `${fontSize}px`,
-      textAlign: isHebrewLine ? 'right' : 'left',
-      direction: isHebrewLine ? 'rtl' : 'ltr',
-      color: highContrast ? '#ffffff' : '#e0e0e0',
-      backgroundColor: highContrast ? '#000000' : 'transparent',
-      padding: '8px',
-      margin: '4px 0',
-      borderRadius: '4px'
-    };
-
-    return (
-      <div key={index} style={lineStyle}>
-        {showChords && line.chords && (
-          <span className="chords" style={{ color: highContrast ? '#ffd700' : '#1DB954' }}>
-            {line.chords}
-          </span>
-        )}
-        <span className="lyrics">{line.lyrics}</span>
-      </div>
-    );
-  };
-
-  const renderLyrics = () => {
-    if (!song?.lyrics) return null;
-    const isArrayOfArrays = Array.isArray(song.lyrics[0]);
-    return isArrayOfArrays 
-      ? song.lyrics.map(renderNewFormatLyrics)
-      : song.lyrics.map(renderOldFormatLyrics);
-  };
-
+    
   function handleQuit() {
     socketService.endRehearsal(sessionId);
     navigate('/');
   }
 
-  if (!song) {
-    return <div className="loading">Loading...</div>;
-  }
+  if (!song) return <div className="loading">Loading...</div>;
 
   return (
     <div className={`live-page ${highContrast ? 'high-contrast' : ''}`}>
-      <div className="controls">
-        <button onClick={() => setAutoScroll(!autoScroll)}>
-          {autoScroll ? 'Pause Scroll' : 'Auto Scroll'}
-        </button>
-        {user?.isAdmin && (
-          <button onClick={handleQuit} className="quit-button">
-            Quit
-          </button>
-        )}
-      </div>
-
-      <div className="song-info">
-        <h1>{song.title}</h1>
-        <h2>{song.artist}</h2>
-      </div>
-
+      <LiveControls
+        autoScroll={autoScroll}
+        setAutoScroll={setAutoScroll}
+        isAdmin={user?.isAdmin}
+        handleQuit={handleQuit}
+      />
+      <SongInfo title={song.title} artist={song.artist} />
       <div className="lyrics-container" ref={lyricsContainerRef}>
-        {renderLyrics()}
+        <LiveLyrics
+          lyrics={song.lyrics}
+          user={user}
+          highContrast={highContrast}
+          fontSize={fontSize}
+        />
       </div>
     </div>
   );

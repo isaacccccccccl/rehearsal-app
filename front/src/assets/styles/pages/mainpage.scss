@@ -16,6 +16,7 @@
     border-radius: 10px;
     h1 {
         color: #e0e0e0;
+        font-size: 18px;
         margin-bottom: 20px;
     }
 
@@ -43,6 +44,7 @@
             }
         }
 
+
         button {
             padding: 10px 20px;
             margin: 10px;
@@ -61,13 +63,13 @@
 
         @include for-mobile-layout {
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 1.2rem;
+            margin-bottom: 24px;
             button {
                 width: 50%;
                 margin: 0;
                 align-self: center;
             }
-           
         }
     }
 }

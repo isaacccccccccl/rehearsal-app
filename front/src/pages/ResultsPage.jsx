@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { loadSongs } from '../store/actions/song.actions'
 import { SongList } from '../cmps/SongList'
@@ -9,16 +9,17 @@ import { socketService } from '../services/socket.service'
 export function ResultsPage() {
     const [searchParams] = useSearchParams()
     const query = searchParams.get('query') || ''
-    const dispatch = useDispatch()
     const navigate = useNavigate()
     const songs = useSelector(state => state.songModule.songs)
     const user = userService.getLoggedinUser()
 
-    useEffect(() => {
-        dispatch(loadSongs(query ? { txt: query } : {}))
-    }, [dispatch, query])
 
-    const handleSongSelect = (songId) => {
+    useEffect(() => {
+        // Always load songs when query changes
+        loadSongs(query ? { txt: query } : {})
+    }, [query])
+
+    function handleSongSelect(songId) {
         if (user?.isAdmin) {
             const song = songs.find(s => s._id === songId)
             if (!song) {

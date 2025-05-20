@@ -25,9 +25,15 @@ export function MainPage() {
 
     if (!user) return null
 
-    const handleSongSelect = (songId) => {
-        if (user.isAdmin) {
-            navigate(`/live/${songId}`)
+    function handleSongSelect(songId) {
+        if (user?.isAdmin) {
+            const song = songs.find(s => s._id === songId)
+            if (!song) {
+                console.error('Song not found for id:', songId)
+                return
+            }
+            socketService.selectRehearsalSong(user._id, song)
+            setTimeout(() => navigate(`/live/${songId}`), 200) // small delay for socket
         }
     }
 
