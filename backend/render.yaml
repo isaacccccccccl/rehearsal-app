@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: jamoveo-backend
+    env: node
+    buildCommand: |
+      cd ../front
+      npm install
+      npm run build
+      cd ../backend
+      npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URL
+        sync: false
+      - key: DB_NAME
+        sync: false 
