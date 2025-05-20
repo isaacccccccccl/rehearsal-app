@@ -14,7 +14,6 @@ A real-time web application for band rehearsals and song management.
 - **Modern, responsive UI:**
   - Dark/blue theme
   - Music note favicon
-  - Mobile-first design
   - Accessible and visually appealing
 - **Clean codebase:** Only essential files and logic
 
@@ -42,7 +41,7 @@ A real-time web application for band rehearsals and song management.
 1. **Start the backend server:**
    ```bash
    cd backend
-   npm start
+   npm run server:dev
    ```
 2. **Start the frontend dev server:**
    ```bash
