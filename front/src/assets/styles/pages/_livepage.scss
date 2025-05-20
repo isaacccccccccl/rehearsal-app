@@ -94,9 +94,9 @@
     @include for-mobile-layout {
       padding: 1rem;
       height: 350px !important;
-      font-size: 0.85em;
+      font-size: 1em;
       .chords, .lyrics, div {
-        font-size: 0.85em !important;
+        font-size: 1em !important;
       }
     }
   }
